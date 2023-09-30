@@ -19,6 +19,9 @@
 <style>
     body{
         font-family: Montserrat !important;
+        font-size:13px !important;
+        font-weight:normal;
+        font-style: normal;
     }
 </style>
     @vite('resources/css/app.css')
