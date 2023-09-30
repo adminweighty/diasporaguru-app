@@ -7,87 +7,17 @@ h1{
      font-size:28pt;
      color: #0a53be;
  }
-.image-container {
-    width:260px;
-    height:85px;
-    text-align:center;
-}
-td {
-    vertical-align: middle !important;
-}
+
+
 img {
     width:260px;
-    height:85px;
+    height:125px;
     height:100%;
 }
-
-/* Landscape phones and portrait tablets */
-@media (max-width: 767px) {
-    h1{
-        font-size:8pt;
-        color: #0a53be;
-    }
-    button {
-        font-size:8pt !important;
-    }
-    #header {
-        color: #0a53be;
-        font-size:8pt !important;
-    }
-    .image-container {
-        width:72px !important;
-        height:46px !important;
-        text-align:center;
-    }
-    th {
-        font-size:8pt !important;
-    }
-    td {
-        vertical-align: middle !important;
-        font-size:8pt !important;
-    }
-     img {
-        width:72px !important;
-        height:100% !important;
-    }
-    input{
-        font-size:8pt !important;
-    }
+.bs-linebreak {
+    height:48px;
 }
 
-/* Portrait phones and smaller */
-@media (max-width: 480px) {
-    h1{
-        font-size:8pt;
-        color: #0a53be;
-    }
-    #header {
-        color: #0a53be;
-        font-size:8pt !important;
-    }
-    button {
-        font-size:8pt !important;
-    }
-    .image-container {
-        width:72px !important;
-        height:46px !important;
-        text-align:center;
-    }
-    th {
-        font-size:8pt !important;
-    }
-    td {
-        vertical-align: middle !important;
-        font-size:8pt !important;
-    }
-     img {
-        width:72px !important;
-        height:100% !important;
-    }
-   input{
-        font-size:8pt !important;
-    }
-}
 </style>
 <template>
     <div class="container">
@@ -97,9 +27,15 @@ img {
 
                    <form>
                         <div class="row">
-
                             <div class="col">
-                                <label id="header" for="exampleInputEmail1"><strong>Receiving Amount USD {{amount_received}}</strong></label>
+                                <label id="header" for="exampleInputEmail1"><strong>Select Countries </strong></label>
+                              <select name="selected" class="form-control" id="" v-model="selected">
+                                    <option value="SA" >South Africa <i class="flag flag-south-africa"></i> to Zimbabwe <i class="flag flag-zimbabwe"></i></option>
+                                    <option value="UK" >United Kingdom <i class="flag flag-united-kingdom"></i> to Zimbabwe <i class="flag flag-zimbabwe"></i></option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label id="header" for="exampleInputEmail1"><strong>Receiving USD </strong></label>
                                 <input type="number" v-model="amount" class="form-control" placeholder="Receiving Amount">
                             </div>
                             <div class="col">
@@ -114,90 +50,98 @@ img {
                 </div>
             </div>
         <hr class="mt-4"/>
-        <div class="row">
-            <div class="mt-4 col-md-12">
-                <div class="panel-body">
-                <div class="table-responsive">
-                    <div class="text-center"><h1><strong>SOUTH AFRICA TO ZIMBABWE</strong></h1></div>
+        <div class="row" v-for="item in remittance_list">
+            <div  class="col-md-10" v-if="item.company_rates_type===selected">
+               <div class="card-body px-0 py-0" >
+                    <div class="row" style="box-shadow: 0px 0px 10px 1px #aaaaaa !important;">
+                        <div class="col-md-8 py-2" style="background-color: white;">
+                            <div class="mx-4 my-4">
+                                <p class="text-muted"><img class="img-responsive" :src="item.company_logo" ></p>
+                                <p class="text-uppercase text-primary mb-0 new-section" style="font-size: 14px;" v-if="item.company_rates_type==='SA'"><strong>SOUTH AFRICA <i class="flag flag-south-africa"></i> TO ZIMBABWE <i class="flag flag-zimbabwe"></i></strong>
+                                    <span class="line-pricing"></span></p>
 
-                    <table class="table table-responsive-sm" style="color:black">
-                        <thead>
-                        <tr>
-                            <th  id="header" scope="col"></th>
-                            <th  id="header" scope="col">ExchangeRate</th>
-                            <th  id="header" scope="col">Charges</th>
-                            <th  id="header" scope="col">MarkUp</th>
-                            <th  id="header" scope="col">Pay</th>
-                        </tr>
-                        </thead>
-                        <tbody v-for="item in remittance_list">
+                                <p class="text-uppercase text-primary mb-0 new-section" style="font-size: 14px;" v-if="item.company_rates_type==='UK'"><strong>United Kingdom <i class="flag flag-united-kingdom"></i> TO ZIMBABWE <i class="flag flag-zimbabwe"></i></strong>
 
-                        <tr v-if="item.company_rates_type==='SA'">
-                            <td>
-                                <a class="link-info" :href="item.company_website" target="_blank"> <img class="img-fluid" v-bind:src="item.company_logo"
-                                /></a>
-                            </td>
-                            <td>{{ item.company_exchange_rate }}</td>
-                            <td>{{ item.company_charges_rate }}</td>
-                            <td>{{ item.company_mark_up*100 }}%</td>
-                            <td>R{{ item.company_total }}</td>
-                        </tr>
+                                    <span class="line-pricing"></span></p>
 
-                        </tbody>
-                    </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ol class="list-unstyled mb-0 pt-0 pb-0">
+                                            <p class="my-3 fw-bold text-muted text-center">
+                                            </p>
+                                            <li class="mb-3" v-if="item.company_rates_type==='SA'">
+                                                <i class="fas fa-check text-success me-3"></i><small>Exchange Rate - R{{item.company_exchange_rate}}</small>
+                                            </li>
+                                            <li class="mb-3" v-if="item.company_rates_type==='SA'">
+                                                <i class="fas fa-check text-success me-3"></i><small>Charges - R{{item.company_charges_rate}}</small>
+                                            </li>
+                                            <li class="mb-3" v-if="item.company_rates_type==='UK'">
+                                                <i class="fas fa-check text-success me-3"></i><small>Exchange Rate - £{{item.company_exchange_rate}}</small>
+                                            </li>
+                                            <li class="mb-3" v-if="item.company_rates_type==='UK'">
+                                                <i class="fas fa-check text-success me-3"></i><small>Charges - £{{item.company_charges_rate}}</small>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ol class="list-unstyled mb-0 pt-0 pb-0">
+                                            <p class="my-3 fw-bold text-muted text-center">
+                                            </p>
+                                            <li class="mb-3">
+                                                <i class="fas fa-check text-success me-3"></i><small>Mark Up - {{item.company_mark_up*100}}%</small>
+                                            </li>
+                                            <li class="mb-3">
+                                                <i class="fas fa-check text-success me-3"></i><small>Updated - {{format_date(item.updated_at)}}</small>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center"
+                             style="background-color:#F9FAFB ; box-shadow: 0px 0px 10px 1px #aaaaaa;">
+                            <div class=" mt-5 pt-4 me-4">
+                                <p class="h5">Sender will pay</p>
+                                <p  v-if="item.company_rates_type==='UK'" class="h2 fw-bold text-black" style="font-size: 40px;">£{{item.company_total}} <small class="text-muted"
+                                                                                                      style="font-size: 15px;">GBP</small></p>
+                                <p  v-if="item.company_rates_type==='SA'" class="h2 fw-bold text-black" style="font-size: 40px;">R{{item.company_total}} <small class="text-muted"
+                                                                                                                                             style="font-size: 15px;">ZAR</small></p>
+                                <p class="text-decoration-underline text-black-50 " style="font-size: 15px;"> <strong>For ${{
+                                        amount_received }} USD Received</strong>
+                                    </p>
 
-                </div>
+                                <p class="text-decoration-underline text-black-50 " style="font-size: 15px;">Learn more about the company</p>
+                                <a :href="item.company_website" style="background: #0a53be"  target="_blank" class="btn btn-dark d-block mb-2 mt-3 text-capitalize">Visit site</a>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
             </div>
-
-            <div class="col-md-12">
-                <div class="panel-body">
-                <div class="table-responsive">
-                    <div class="text-center"><h1><strong>UK TO ZIMBABWE</strong></h1></div>
-                    <table class="table table-responsive-sm" style="color:black">
-                        <thead>
-                        <tr>
-                            <th  id="header" scope="col"></th>
-                            <th  id="header" scope="col">ExchangeRate</th>
-                            <th  id="header" scope="col">Charges</th>
-                            <th  id="header" scope="col">MarkUp</th>
-                            <th  id="header" scope="col">Pay</th>
-                        </tr>
-                        </thead>
-                        <tbody v-for="item in remittance_list">
-
-                        <tr v-if="item.company_rates_type==='UK'">
-                            <td>
-                                <a class="link-info" :href="item.company_website" target="_blank">  <img class="img-fluid"  v-bind:src="item.company_logo"
-                                /></a>
-                            </td>
-                            <td>{{ item.company_exchange_rate }}</td>
-                            <td>{{ item.company_charges_rate }}</td>
-                            <td>{{ item.company_mark_up*100 }}%</td>
-                            <td>${{ item.company_total }}</td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-
+            <div class="row">
+                <div class="col-md-12 bs-linebreak">
+                    <hr/>
                 </div>
-                </div>
-
             </div>
         </div>
-    </div>
+ </div>
 </template>
 
 <script>
 import api from './client'
+import moment from 'moment';
+import CountryFlag from 'vue-country-flag'
 
 export default {
     name: "Remittance Calculator",
+    CountryFlag:CountryFlag,
     data() {
         return {
             remittance_list: [],
             amount: 0,
+            selected: 'SA',
             amount_received: 0
         };
     },
@@ -206,6 +150,11 @@ export default {
         this.getData();
     },
     methods: {
+        format_date(value){
+            if (value) {
+                return moment(String(value)).format('DD MMMM YYYY')
+            }
+        },
         submit() {
             this.amount_received=this.amount;
             const headers = {

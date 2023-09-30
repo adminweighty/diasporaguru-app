@@ -14,7 +14,7 @@ class ApiController extends Controller
     {
         try {
 
-            $companyRates=CompanyRates::all();
+            $companyRates=CompanyRates::orderBy('company_name', 'ASC')->get();
             return response()->json([
                 'rates' => $companyRates
             ], 200);
@@ -32,7 +32,7 @@ class ApiController extends Controller
     {
         try {
 
-            $companyRates=CompanyRates::all();
+            $companyRates=CompanyRates::orderBy('company_name', 'ASC')->get();
             foreach ($companyRates as $p) {
                  $p->company_total= round(($amount*$p->company_exchange_rate)+$p->company_charges_rate,2);
             }
