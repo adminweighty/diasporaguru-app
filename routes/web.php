@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('app');
+    return view('welcome');
 })
     ->name('application');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/remittance-calculator', [App\Http\Controllers\CaculatorController::class, 'index'])->name('remittance-calculator');

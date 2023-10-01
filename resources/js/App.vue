@@ -157,11 +157,9 @@ img {
 <script>
 import api from './client'
 import moment from 'moment';
-import CountryFlag from 'vue-country-flag'
 
 export default {
     name: "Remittance Calculator",
-    CountryFlag: CountryFlag,
     data() {
         return {
             remittance_list: [],

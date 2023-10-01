@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('company-rates', 'App\Http\Controllers\API\ApiController@getCompanyRates');
 Route::any('company-rates-receive/{amount}', 'App\Http\Controllers\API\ApiController@receiveCompanyRatesAll');
+Route::resource('company-rates-crud',App\Http\Controllers\CompanyRatesController::class)->only(['index','store','show','update','destroy']);
