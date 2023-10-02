@@ -57,15 +57,15 @@ img {
     <hr class="mt-4"/>
     <div class="row">
         <div class="col-12 mb-2 text-start">
-            <router-link :to='{name:"categoryAdd"}' class="btn btn-primary">Create Rate</router-link>
+            <router-link :to='{name:"companyRateAdd"}' class="btn btn-primary">Create Rate</router-link>
         </div>
         <div class="row" v-for="(item,key) in companyRates" :key="key">
-            <div class="col-md-10">
-                <div class="card-body px-0 py-0">
+            <div class="col-md-10" v-if="item.company_rates_type===selected">
+                <div class="mt-4 card-body px-0 py-0">
                     <div class="row" style="box-shadow: 0px 0px 10px 1px #aaaaaa !important;">
                         <div class="col-md-8 py-2" style="background-color: white;">
                             <div class="mx-4 my-4">
-                                <p class="text-muted"><img class="img-responsive" :src="item.company_logo"></p>
+                                <p class="text-muted"><img class="img-responsive" :src="item.company_logo" /></p>
                                 <p class="text-uppercase text-primary mb-0 new-section" style="font-size: 13px !important;"
                                    v-if="item.company_rates_type==='SA'"><strong>SOUTH AFRICA<i
                                     class="flag flag-south-africa"></i>TO ZIMBABWE<i
@@ -138,8 +138,8 @@ img {
 
                                 <p class="text-decoration-underline text-black-50 " style="font-size: 15px;">Learn more
                                     about the company</p>
-                                <router-link :to='{name:"categoryEdit",params:{id:item.id}}' class="btn btn-success">Edit</router-link>
-                                <button type="button" @click="deleteCategory(item.id)" class="btn btn-danger">Delete</button>
+                                <router-link :to='{name:"companyRateEdit",params:{id:item.id}}' class="btn btn-success">Edit</router-link>
+                                <button type="button" @click="deleteCompanyRate(item.id)" class="btn btn-danger">Delete</button>
 
                             </div>
 
@@ -148,11 +148,7 @@ img {
                 </div>
 
             </div>
-            <div class="row">
-                <div class="col-md-12 bs-linebreak">
-                    <hr/>
-                </div>
-            </div>
+
         </div>
     </div>
 </template>
@@ -172,6 +168,7 @@ export default {
         }
     },
     mounted(){
+
         this.getcompanyRates()
     },
     methods:{
@@ -187,7 +184,7 @@ export default {
             };
             api.post("https://api.diasporaguru.com/public/api/company-rates-receive/" + this.amount, {headers})
                 .then(res => {
-                    this.companyRates = res.data.rates;
+                    this.companyRates = res.data.rates
                     }
                 ).catch(error => {
                 console.log(error);
@@ -202,7 +199,7 @@ export default {
                 this.companyRates = []
             })
         },
-        deleteCategory(id){
+        deleteCompanyRate(id){
             if(confirm("Are you sure to delete this category ?")){
                 api.delete(`/company-rates-crud/${id}`).then(response=>{
                     this.getcompanyRates()
