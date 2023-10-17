@@ -94,7 +94,7 @@ export default {
     },
     methods:{
         async create(){
-            await api.post('/company-rates-crud',this.companyRate).then(response=>{
+            await api.post('https://api.diasporaguru.com/public/api/company-rates-crud',this.companyRate).then(response=>{
                 this.$router.push({name:"companyRateList"})
             }).catch(error=>{
                 console.log(error)

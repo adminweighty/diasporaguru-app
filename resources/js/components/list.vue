@@ -192,7 +192,7 @@ export default {
             });
         },
         async getcompanyRates(){
-            await api.get('/company-rates-crud').then(response=>{
+            await api.get('https://api.diasporaguru.com/public/api/company-rates-crud').then(response=>{
                 this.companyRates = response.data
             }).catch(error=>{
                 console.log(error)
@@ -201,7 +201,7 @@ export default {
         },
         deleteCompanyRate(id){
             if(confirm("Are you sure to delete this category ?")){
-                api.delete(`/company-rates-crud/${id}`).then(response=>{
+                api.delete(`https://api.diasporaguru.com/public/api/company-rates-crud/${id}`).then(response=>{
                     this.getcompanyRates()
                 }).catch(error=>{
                     console.log(error)

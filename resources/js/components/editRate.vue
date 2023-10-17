@@ -100,7 +100,7 @@ export default {
     },
     methods:{
         async showCompanyRate(){
-            await api.get(`/company-rates-crud/${this.$route.params.id}`).then(response=>{
+            await api.get(`https://api.diasporaguru.com/public/api/company-rates-crud/${this.$route.params.id}`).then(response=>{
                 console.log(response.data);
                 const { company_logo,company_rates_type,company_name,company_exchange_rate,
                     company_charges_rate,company_mark_up,company_total,company_website } = response.data;
@@ -117,7 +117,7 @@ export default {
             })
         },
         async update(){
-            await api.post(`/company-rates-crud/${this.$route.params.id}`,this.companyRate).then(response=>{
+            await api.post(`https://api.diasporaguru.com/public/api/company-rates-crud/${this.$route.params.id}`,this.companyRate).then(response=>{
                 this.$router.push({name:"companyRateList"})
             }).catch(error=>{
                 console.log(error)

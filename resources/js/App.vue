@@ -26,7 +26,6 @@ img {
         <div class="row">
             <div class="mt-4 col-md-12 col-lg-12">
 
-
                 <form>
                     <div class="row">
                         <div class="col">
@@ -149,6 +148,31 @@ img {
                 <div class="col-md-12 bs-linebreak">
                     <hr/>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-4 col-md-12 col-lg-12">
+
+                <h2>Price Comparison Disclaimer</h2>
+                <p>
+                    Our price comparison tool, Diasporaguru, enables you to compare the total cost of international transfers between various providers. We consider the complete expenses involved, including exchange rates and transfer fees
+                </p>
+                <h2>What are the costs of sending a transfer?</h2>
+                <p>
+                    The cost of a transfer typically consists of two main components: the exchange rate and the transfer fee.
+                    <br/><br/>
+                    <strong>Exchange rate</strong>: When sending money internationally, there are usually two currencies involved, the one you use to pay and the one the recipient receives. Thus, international transfers often include an exchange rate. The difference between this rate and the market rate (such as the one found on Google) is known as the "markup". Some providers transparently display this markup alongside the exchange rate, while others incorporate it within the rate itself.
+                    <br/><br/>
+                    <strong>Transfer fee</strong>: This fee is charged by the provider for the transfer, usually comprising a fixed fee and a variable fee based on the transfer amount, after the currency exchange has taken place.
+                    <br/><br/>
+                    Please note that the comparison table may not include fees imposed by the receiving bank or correspondent banks for international transfers. As we do not have visibility over these additional fees, they are not reflected in the comparison table.
+                </p>
+                <h2>How is this data collected?</h2>
+                <p>
+                    We obtain providers' data by directly collecting publicly available transfer costs from their websites or by simulating transactions as if we were customers using their remittance services. It's important to note that we gather data based on various transfer amount thresholds (e.g., US$100, US$500, US$1000) rather than specific amounts.
+                   <br/><br/>
+                   While we make every effort to provide accurate and reliable information through our widget, it's important to note that the data is not updated in real-time. We strive to update it regularly, typically on a daily basis. Therefore, we cannot guarantee that the information is always 100% accurate, complete, or up to date at any given moment. Additionally, since we collect data using thresholds rather than precise amounts, the total cost displayed in our comparison table may differ from the cost stated on the provider's website.
+                </p>
             </div>
         </div>
     </div>
